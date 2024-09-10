@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Rock Paper Scissors</title>
     <style>
-        /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,8 +17,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #004d99; /* Changed navbar color */
-            padding: 10px 20px;
+            background-color: #004d99;
+            padding: 5px;
             color: white;
             position: fixed;
             top: 0;
@@ -27,26 +26,12 @@
             z-index: 1000;
         }
         .navbar h1, .navbar h2 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .navbar .nav-links {
-            display: flex;
-        }
-        .navbar .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
-        .navbar .nav-links a:hover {
-            text-decoration: underline;
-        }
-        .navbar .toggle-btn {
-            display: none;
+            margin: 10px;
+            font-size: 22px;
         }
         .main-container {
             text-align: center;
-            margin-top: 100px; /* To accommodate the fixed navbar */
+            margin-top: 100px;
             flex: 1;
         }
         .game-board {
@@ -116,11 +101,11 @@
         .footer {
             display: flex;
             justify-content: space-around;
-            background-color: #004d99; /* Changed footer color */
+            background-color: #004d99;
             color: white;
             padding: 20px;
             margin-top: 30px;
-            text-align: center;
+            text-align: left;
             flex-wrap: wrap;
         }
         .footer .info, .footer .rules {
@@ -131,8 +116,14 @@
             margin-top: 0;
         }
         .footer .sub-footer {
-            background-color: #003366;
             padding: 10px;
+            text-align: center;
+        }
+        .sub-footer p {
+            color:wheat;
+            background-color: #007bff;
+            margin: 0;
+            font-size: 14px;
             text-align: center;
         }
         .modal {
@@ -183,12 +174,27 @@
         .result {
             font-size: 20px;
             font-weight: bold;
+            margin-top: 20px;
         }
         .result span {
             color: #007bff;
         }
         .result p {
-            margin: 0;
+            margin: 10px 0;
+        }
+        @media (max-width: 600px) {
+            .navbar h1, .navbar h2 {
+                font-size: 18px;
+            }
+            .game-board {
+                padding: 20px;
+            }
+            .footer, .sub-footer {
+                padding: 10px;
+            }
+            .result {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -245,37 +251,25 @@
     <div class="modal-content">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <h2 th:text="${game.result}"></h2>
-        <button class="modal-replay-btn" onclick="replayGame()">Replay</button>
+        <button class="modal-replay-btn" onclick="playAgain()">Play Again</button>
     </div>
 </div>
 
 <script>
-    // Script to handle modal
-    function openModal() {
-        document.getElementById('resultModal').style.display = 'flex';
+    function openModal(result) {
+        const modal = document.getElementById('resultModal');
+        const resultText = modal.querySelector('h2');
+        resultText.textContent = result;
+        modal.style.display = 'flex';
     }
 
     function closeModal() {
         document.getElementById('resultModal').style.display = 'none';
     }
 
-    function replayGame() {
+    function playAgain() {
         closeModal();
         document.querySelector('form').reset();
-        document.querySelectorAll('.choice-label').forEach(label => label.classList.remove('selected'));
-    }
-
-    // Update UI to show selected choice
-    document.querySelectorAll('.choice-label').forEach(label => {
-        label.addEventListener('click', function() {
-            document.querySelectorAll('.choice-label').forEach(label => label.classList.remove('selected'));
-            this.classList.add('selected');
-        });
-    });
-
-    // Show modal if result is available
-    if (document.querySelector('.result p')) {
-        openModal();
     }
 </script>
 </body>
