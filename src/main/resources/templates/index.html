@@ -1,262 +1,282 @@
-    <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissors</title>
-        <style>
-            /* Basic styling */
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-            }
-            .navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: #333;
-                padding: 10px 20px;
-                color: white;
-                position: fixed;
-                top: 0;
-                width: 100%;
-                z-index: 1000;
-            }
-            .navbar h1, .navbar h2 {
-                margin: 0;
-                font-size: 24px;
-            }
-            .navbar .nav-links {
-                display: flex;
-            }
-            .navbar .nav-links a {
-                color: white;
-                text-decoration: none;
-                margin-left: 15px;
-            }
-            .navbar .nav-links a:hover {
-                text-decoration: underline;
-            }
-            .navbar .toggle-btn {
-                display: none;
-            }
-            .main-container {
-                text-align: center;
-                margin-top: 80px; /* To accommodate the fixed navbar */
-                flex: 1;
-            }
-            .game-board {
-                display: inline-block;
-                background: linear-gradient(135deg, #f0f9ff, #cbebf0);
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                margin: 0 auto;
-                max-width: 600px;
-                position: relative;
-            }
-            .game-board::before {
-                content: "Play Now! 🕹️";
-                position: absolute;
-                top: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #007bff;
-                color: white;
-                padding: 10px 20px;
-                border-radius: 5px;
-                font-size: 18px;
-                font-weight: bold;
-            }
-            .choices {
-                margin-bottom: 20px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
-            }
-            .choice-label {
-                cursor: pointer;
-                padding: 20px;
-                border: 2px solid #007bff;
-                border-radius: 10px;
-                background-color: white;
-                transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
-                font-size: 20px;
-            }
-            .choice-label:hover {
-                background-color: #e7f1ff;
-                transform: scale(1.05);
-            }
-            .choice-label.selected {
-                background-color: #007bff;
-                color: white;
-                border-color: #0056b3;
-            }
-            button {
-                padding: 15px 30px;
-                font-size: 18px;
-                color: white;
-                background-color: #007bff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            button:hover {
-                background-color: #0056b3;
-            }
-            .footer {
-                display: flex;
-                justify-content: space-around;
-                background-color: #333;
-                color: white;
-                padding: 20px;
-                margin-top: 30px;
-                text-align: center;
-            }
-            .footer .info, .footer .rules {
-                flex: 1;
-                margin: 0 20px;
-            }
-            .footer h4 {
-                margin-top: 0;
-            }
-            .modal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                justify-content: center;
-                align-items: center;
-            }
-            .modal-content {
-                background: white;
-                padding: 30px;
-                border-radius: 10px;
-                text-align: center;
-                width: 80%;
-                max-width: 500px;
-                position: relative;
-            }
-            .modal-content h2 {
-                margin: 0;
-                font-size: 24px;
-            }
-            .modal-close {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                cursor: pointer;
-                font-size: 24px;
-                color: #333;
-            }
-            .modal-replay-btn {
-                margin-top: 20px;
-                padding: 10px 20px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            .modal-replay-btn:hover {
-                background-color: #0056b3;
-            }
-        </style>
-    </head>
-    <body>
-    <div class="navbar">
-        <h2>Deepak Singh</h2>
-        <h1>Rock Paper Scissors</h1>
-    </div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #004d99; /* Changed navbar color */
+            padding: 10px 20px;
+            color: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar h1, .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar .nav-links {
+            display: flex;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .navbar .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .navbar .toggle-btn {
+            display: none;
+        }
+        .main-container {
+            text-align: center;
+            margin-top: 100px; /* To accommodate the fixed navbar */
+            flex: 1;
+        }
+        .game-board {
+            display: inline-block;
+            background: linear-gradient(135deg, #f0f9ff, #cbebf0);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+            max-width: 600px;
+            position: relative;
+        }
+        .game-board::before {
+            content: "Play Now! 🕹️";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .choices {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .choice-label {
+            cursor: pointer;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: white;
+            transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .choice-label:hover {
+            background-color: #e7f1ff;
+            transform: scale(1.05);
+        }
+        .choice-label.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            background-color: #004d99; /* Changed footer color */
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        .footer .info, .footer .rules {
+            flex: 1;
+            margin: 0 20px;
+        }
+        .footer h4 {
+            margin-top: 0;
+        }
+        .footer .sub-footer {
+            background-color: #003366;
+            padding: 10px;
+            text-align: center;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+        .modal-content h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+        }
+        .modal-replay-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .modal-replay-btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .result span {
+            color: #007bff;
+        }
+        .result p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <h2>Deepak Singh</h2>
+    <h1>Rock Paper Scissors</h1>
+</div>
 
-    <div class="main-container">
-        <div class="game-board">
-            <h2>Play the Game</h2>
-            <form action="/play" method="post">
-                <div class="choices">
-                    <label class="choice-label" for="rock">
-                        <input type="radio" id="rock" name="userChoice" value="Rock" required hidden>
-                        Rock ✊
-                    </label>
-                    <label class="choice-label" for="paper">
-                        <input type="radio" id="paper" name="userChoice" value="Paper" required hidden>
-                        Paper 📝
-                    </label>
-                    <label class="choice-label" for="scissors">
-                        <input type="radio" id="scissors" name="userChoice" value="Scissors" required hidden>
-                        Scissors ✂️
-                    </label>
-                </div>
-                <button type="submit">Play</button>
-            </form>
-            <div>
-                <p th:if="${game.userChoice != null}">You chose: <span th:text="${game.userChoice}"></span></p>
-                <p th:if="${game.computerChoice != null}">Computer chose: <span th:text="${game.computerChoice}"></span></p>
-                <p th:if="${game.result != null}">Result: <span th:text="${game.result}"></span></p>
+<div class="main-container">
+    <div class="game-board">
+        <h2>Play the Game</h2>
+        <form action="/play" method="post">
+            <div class="choices">
+                <label class="choice-label" for="rock">
+                    <input type="radio" id="rock" name="userChoice" value="Rock" required hidden>
+                    Rock ✊
+                </label>
+                <label class="choice-label" for="paper">
+                    <input type="radio" id="paper" name="userChoice" value="Paper" required hidden>
+                    Paper 📝
+                </label>
+                <label class="choice-label" for="scissors">
+                    <input type="radio" id="scissors" name="userChoice" value="Scissors" required hidden>
+                    Scissors ✂️
+                </label>
             </div>
+            <button type="submit">Play</button>
+        </form>
+        <div class="result">
+            <p th:if="${game.userChoice != null}">You chose: <span th:text="${game.userChoice}"></span> 🤔</p>
+            <p th:if="${game.computerChoice != null}">Computer chose: <span th:text="${game.computerChoice}"></span> 🤖</p>
+            <p th:if="${game.result != null}" style="font-size: 24px;">Result: <span th:text="${game.result}"></span> 🎉</p>
         </div>
     </div>
+</div>
 
-    <div class="footer">
-        <div class="info">
-            <h4>About the Project</h4>
-            <p>This is a simple Rock, Paper, Scissors game implemented using Java Spring Boot and Thymeleaf. Enjoy playing!</p>
-        </div>
-        <div class="rules">
-            <h4>Game Rules</h4>
-            <p>Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock.</p>
-        </div>
+<div class="footer">
+    <div class="info">
+        <h4>About the Project</h4>
+        <p>This is a simple Rock, Paper, Scissors game implemented using Java Spring Boot and Thymeleaf. Enjoy playing!</p>
     </div>
-
-    <div id="resultModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <h2 th:text="${game.result}"></h2>
-            <button class="modal-replay-btn" onclick="replayGame()">Replay</button>
-        </div>
+    <div class="rules">
+        <h4>Game Rules</h4>
+        <p>Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock.</p>
     </div>
+</div>
 
-    <script>
-        // Script to handle modal
-        function openModal() {
-            document.getElementById('resultModal').style.display = 'flex';
-        }
+<div class="sub-footer">
+    <p>&copy; 2024 Deepak Singh | Email: <a href="mailto:deepsinghkumar01@gmail.com">deepsinghkumar01@gmail.com</a></p>
+</div>
 
-        function closeModal() {
-            document.getElementById('resultModal').style.display = 'none';
-        }
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2 th:text="${game.result}"></h2>
+        <button class="modal-replay-btn" onclick="replayGame()">Replay</button>
+    </div>
+</div>
 
-        function replayGame() {
-            closeModal();
-            document.querySelector('form').reset();
+<script>
+    // Script to handle modal
+    function openModal() {
+        document.getElementById('resultModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('resultModal').style.display = 'none';
+    }
+
+    function replayGame() {
+        closeModal();
+        document.querySelector('form').reset();
+        document.querySelectorAll('.choice-label').forEach(label => label.classList.remove('selected'));
+    }
+
+    // Update UI to show selected choice
+    document.querySelectorAll('.choice-label').forEach(label => {
+        label.addEventListener('click', function() {
             document.querySelectorAll('.choice-label').forEach(label => label.classList.remove('selected'));
-        }
-
-        // Update UI to show selected choice
-        document.querySelectorAll('.choice-label').forEach(label => {
-            label.addEventListener('click', function() {
-                document.querySelectorAll('.choice-label').forEach(label => label.classList.remove('selected'));
-                this.classList.add('selected');
-            });
+            this.classList.add('selected');
         });
+    });
 
-        // Open modal if there is a result
-        document.addEventListener('DOMContentLoaded', function() {
-            const result = document.querySelector('p[th\\:if*="game.result"]');
-            if (result && result.innerText.trim() !== '') {
-                openModal();
-            }
-        });
-    </script>
-    </body>
-    </html>
+    // Show modal if result is available
+    if (document.querySelector('.result p')) {
+        openModal();
+    }
+</script>
+</body>
+</html>
