@@ -74,16 +74,15 @@ To run this project on your local machine, follow these steps:
    ```
    git clone https://github.com/your-username/RockPaperScissorsGame.git
    cd RockPaperScissorsGame
-  ```
+   ```
 2. Build the project:
-    ```    
-        mvn clean install
     ```
+     mvn clean install
+   ```
 3. Run the application:
-    ```
-        mvn spring-boot:run
-
-
+   ```
+      mvn spring-boot:run
+   ```
 ### Open your browser and navigate to http://localhost:8080/game to play!
 
 ## ⚙️ API Endpoints
